@@ -27,3 +27,5 @@ venv/
 dinov2-*/
 gpt2/
 datasets/
+map*/
+pre*/
