@@ -7,7 +7,7 @@ mkdir -p $TMPDIR
 outdir=../datasets/R2R/exprs_map/pretrain/cmt-vitbase-mlm.mrc.sap-init.lxmert-aug.speaker-new-nocp-2-gate-text
 
 # train (使用 torchrun)
-CUDA_VISIBLE_DEVICES='0' torchrun --master_port 29501 \
+CUDA_VISIBLE_DEVICES='4' torchrun --master_port 29501 \
     --nproc_per_node=${NUM_GPUS} --node_rank $NODE_RANK \
     train_r2r.py --world_size ${NUM_GPUS} \
     --vlnbert cmt \

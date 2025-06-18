@@ -341,15 +341,16 @@ class ReverieTextPathData(object):
         key = '%s_%s' % (scan, viewpoint)
         if self.is_train:
             ran = np.array([random.random() for i in range(36)])
-            with h5py.File(self.img_ft_file + '/dino_features_36_1768dim.hdf5', 'r') as f:
+            with h5py.File(self.img_ft_file + '/dino_features_36_vit_b14.hdf5', 'r') as f:
                 view_fts = f[key][...][:].astype(np.float32)
 
             with h5py.File(self.img_ft_file + '/aug_views.hdf5', 'r') as f:
                 aug_fts = f[key][...][:].astype(np.float32)
+                aug_fts = aug_fts[:, :768]  # 截取前 768 维
 
             view_fts[ran > 0.5] = aug_fts[ran > 0.5]
         else:
-            with h5py.File(self.img_ft_file + '/dino_features_36_1768dim.hdf5', 'r') as f:
+            with h5py.File(self.img_ft_file + '/dino_features_36_vit_b14.hdf5', 'r') as f:
                 view_fts = f[key][...][:].astype(np.float32)
 
         obj_attrs = {}
@@ -939,13 +940,15 @@ class R2RTextPathData(ReverieTextPathData):
         key = '%s_%s' % (scan, viewpoint)
         if self.is_train:
             ran = np.array([random.random() for i in range(36)])
-            with h5py.File(self.img_ft_file + '/dino_features_36_1768dim.hdf5', 'r') as f:
+            with h5py.File(self.img_ft_file + '/dino_features_36_vit_b14.hdf5', 'r') as f:
                 view_fts = f[key][...][:].astype(np.float32)
             with h5py.File(self.img_ft_file + '/aug_views.hdf5', 'r') as f:
                 aug_fts = f[key][...][:].astype(np.float32)
+                aug_fts = aug_fts[:, :768]  # 截取前 768 维
+
             view_fts[ran > 0.5] = aug_fts[ran > 0.5]
         else:
-            with h5py.File(self.img_ft_file + '/dino_features_36_1768dim.hdf5', 'r') as f:
+            with h5py.File(self.img_ft_file + '/dino_features_36_vit_b14.hdf5', 'r') as f:
                 view_fts = f[key][...][:].astype(np.float32)
 
         return view_fts
@@ -1168,14 +1171,16 @@ class SoonTextPathData(ReverieTextPathData):
 
         if self.is_train:
             ran = np.array([random.random() for i in range(36)])
-            with h5py.File(self.img_ft_file + '/dino_features_36_1768dim.hdf5', 'r') as f:
+            with h5py.File(self.img_ft_file + '/dino_features_36_vit_b14.hdf5', 'r') as f:
                 view_fts = f[key][...][:].astype(np.float32)
 
             with h5py.File(self.img_ft_file + '/aug_views.hdf5', 'r') as f:
                 aug_fts = f[key][...][:].astype(np.float32)
+                aug_fts = aug_fts[:, :768]  # 截取前 768 维
+
             view_fts[ran > 0.5] = aug_fts[ran > 0.5]
         else:
-            with h5py.File(self.img_ft_file + '/dino_features_36_1768dim.hdf5', 'r') as f:
+            with h5py.File(self.img_ft_file + '/dino_features_36_vit_b14.hdf5', 'r') as f:
                 view_fts = f[key][...][:].astype(np.float32)
 
         obj_attrs = {}

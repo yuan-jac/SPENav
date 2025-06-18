@@ -7,8 +7,8 @@
     "nearby_vp_steps": null,
     "max_objects": 20,
     "max_txt_len": 200,
-    "train_batch_size": 32,
-    "val_batch_size": 32,
+    "train_batch_size": 28,
+    "val_batch_size": 16,
     "gradient_accumulation_steps": 1,
     "learning_rate": 5e-05,
     "valid_steps": 2500,
@@ -44,12 +44,10 @@
         "scanvp_cands_file": "../datasets/R2R/annotations/scanvp_candview_relangles.json",
         "tasks": [
           "mlm",
-          "mrc",
           "sap",
           "og"
         ],
         "mix_ratio": [
-          1,
           1,
           1,
           1

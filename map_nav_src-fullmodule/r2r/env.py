@@ -677,8 +677,6 @@ class R2RNavBatch(object):
         for i, (feature, ObjectText_feat,state,spatial_fts,grid_fts,grid_map,gridmap_pos_fts) in enumerate(self.env.getStates()):
 
             item = self.batch[i]
-            if state is None:
-                raise ValueError(f"[env.py] getState 返回 None，检查 viewpoint/scan 是否有效。")
             base_view_id = state.viewIndex
             '''for i, feat in enumerate(feature):
                 print(f'[{i}] shape: ', np.array(feat).shape)

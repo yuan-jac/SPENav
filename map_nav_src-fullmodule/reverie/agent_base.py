@@ -5,9 +5,9 @@ from collections import defaultdict
 import torch
 import torch.nn as nn
 from torch.nn.parallel import DistributedDataParallel as DDP
-from utils.distributed import is_default_gpu
-from utils.logger import print_progress
 
+from map_nav_src.utils.distributed import is_default_gpu
+from map_nav_src.utils.logger import print_progress
 
 class BaseAgent(object):
     ''' Base class for an REVERIE agent to generate and save trajectories. '''

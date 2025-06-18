@@ -17,7 +17,7 @@ class BaseAgent(object):
         self.env = env
         self.results = {}
 
-    def get_results(self, detailed_output=False):
+    def get_results(self, detailed_output=True):
         output = []
         for k, v in self.results.items():
             output.append({'instr_id': k, 'trajectory': v['path']})

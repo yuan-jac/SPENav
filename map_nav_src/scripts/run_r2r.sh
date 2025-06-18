@@ -63,8 +63,6 @@ CUDA_VISIBLE_DEVICES="0,1" python3 -m torch.distributed.launch --node_rank 0 --n
   --tokenizer bert \
 	--bert_ckpt_file  datasets/R2R/exprs_map/pretrain/cmt-vitbase-mlm.mrc.sap-init.lxmert-aug.speaker-new-ckp-3-2/ckpts/model_step_100000.pt \
   --eval_first
-
-  #--resume_file  ../datasets/R2R/exprs_map/finetune/Grid_Map-dagger-vitbase-seed.0-init.aug.45k-new/ckpts/best_3 \
 	#--resume_file datasets/R2R/exprs_map/finetune/Grid_Map-dagger-dino_imagenet-seed.0-init.aug.45k-new_dino+siglip+nomrc+1+gelu/ckpts/best_val_unseen \
 
 # test

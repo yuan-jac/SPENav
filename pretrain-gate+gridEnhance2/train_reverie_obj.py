@@ -60,6 +60,16 @@ def create_dataloaders(
             dataloaders[task_name] = PrefetchLoader(task_loader, device)
     return dataloaders
 
+def check_parameter_initialization(model):
+    for name, param in model.named_parameters():
+        if not param.requires_grad:
+            continue
+        if torch.isnan(param).any():
+            LOGGER.error(f"❌ Parameter {name} contains NaNs.")
+        elif torch.all(param == 0):
+            LOGGER.warning(f"⚠️ Parameter {name} is all zeros.")
+        elif param.std() < 1e-6:
+            LOGGER.warning(f"⚠️ Parameter {name} has very low std: {param.std().item():.2e}")
 
 def main(opts):
     default_gpu, n_gpu, device = set_cuda(opts)
@@ -113,7 +123,7 @@ def main(opts):
             del tmp
         elif opts.init_pretrained == 'lxmert':
             tmp = torch.load(
-                '../datasets/pretrained/LXMERT/model_LXRT.pth', 
+                '/home/files/A/zhanghuaxiang3/GridMM/datasets/pretrained/LXMERT/model_LXRT.pth',
                 map_location=lambda storage, loc: storage
             )
             for param_name, param in tmp.items():
@@ -129,6 +139,7 @@ def main(opts):
                                                      'bert.img_embeddings.fusion_module.cross_encoder.x_layers')
                     checkpoint[param_name1] = checkpoint[param_name2] = checkpoint[param_name3] = checkpoint[
                         param_name4] = param
+
                 elif 'cls.predictions' in param_name:
                     param_name = param_name.replace('cls.predictions', 'mlm_head.predictions')
                     checkpoint[param_name] = param
@@ -137,11 +148,31 @@ def main(opts):
             del tmp
 
     model_class = GlocalTextPathCMTPreTraining
-
     # update some training configs
-    model = model_class.from_pretrained(
-        pretrained_model_name_or_path=None, config=model_config, state_dict=checkpoint
-    )
+    model = model_class(config=model_config)  # 先不加载权重，直接构建模型
+    if checkpoint is not None:
+        LOGGER.info("Loading checkpoint into model...")
+        missing_keys, unexpected_keys = model.load_state_dict(checkpoint, strict=False)
+
+        if missing_keys:
+            LOGGER.warning("❌ Missing keys in checkpoint:")
+            for key in missing_keys:
+                LOGGER.warning(f"  - {key}")
+        if unexpected_keys:
+            LOGGER.warning("❌ Unexpected keys in checkpoint:")
+            for key in unexpected_keys:
+                LOGGER.warning(f"  - {key}")
+        if not missing_keys and not unexpected_keys:
+            LOGGER.info("✅ All model parameters initialized successfully.")
+        else:
+            LOGGER.warning("⚠️ Model parameters NOT fully initialized.")
+
+        # 可选：数值检查
+        check_parameter_initialization(model)
+    else:
+        LOGGER.warning("⚠️ No checkpoint provided. Model will be randomly initialized.")
+    if opts.checkpoint:
+        pass
     model.train()
     set_dropout(model, opts.dropout)
     model = wrap_model(model, device, opts.local_rank)
