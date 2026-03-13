@@ -86,7 +86,9 @@ cd ..
 
 ### Step 2: Download Dataset and Simulators
 
-**VLN-CE Dataset**: Download from [Google Drive](https://drive.google.com/drive/folders/1544Lb4mySyTsh3aKOIzag4_R7HCeULEV?usp=drive_link)
+**VLN-CE Dataset** (named `data`): Download from [Google Drive](https://drive.google.com/drive/folders/1hoSu6j-6j1cS6nvplIU9m2n3fGk2g-zK?usp=drive_link)
+
+**Datasets** (annotations & preprocessed features): Download from [Google Drive](https://drive.google.com/drive/folders/1544Lb4mySyTsh3aKOIzag4_R7HCeULEV?usp=drive_link)
 
 **Matterport3D Simulator**: Follow the instructions [here](https://github.com/peteanderson80/Matterport3DSimulator)
 
