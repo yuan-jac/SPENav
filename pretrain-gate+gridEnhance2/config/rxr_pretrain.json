@@ -34,16 +34,14 @@
       ],
       "val_seen_traj_files": [ "../datasets/RXR/annotations/rxr_val_seen_enc.jsonl" ],
       "val_unseen_traj_files": [ "../datasets/RXR/annotations/rxr_val_unseen_enc.jsonl" ],
-      "connectivity_dir": "../datasets/RXR/connectivity",
-      "img_ft_file": "../datasets/RXR/features",
+      "connectivity_dir": "../datasets/R2R/connectivity",
+      "img_ft_file": "../datasets/R2R/features",
       "scanvp_cands_file": "../datasets/RXR/annotations/scanvp_candview_relangles.json",
       "tasks": [
         "mlm",
-        "mrc",
         "sap"
       ],
       "mix_ratio": [
-        1,
         1,
         1
       ]

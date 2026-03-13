@@ -630,7 +630,7 @@ class GlocalTextPathNavCMT(BertPreTrainedModel):
         self.clip = CLIP(
             input_resolution=224, patch_size=32, width=768, layers=12, heads=12
         )
-        self.visual_encoder = timm.create_model('vit_base_patch16_224', pretrained=False)
+        self.visual_encoder = timm.create_model('vit_base_patch16_224_dino', pretrained=False)
 
         self.embeddings = BertEmbeddings(config)
         self.lang_encoder = LanguageEncoder(config)

@@ -20,7 +20,7 @@ SIMULATOR:
     HFOV: 90
   MIN_DEPTH: 0.
   MAX_DEPTH: 10.
-    TYPE:
+  TYPE:
       Sim-v1
 TASK:
   TYPE: VLN-v0

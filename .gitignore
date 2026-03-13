@@ -1,31 +1,67 @@
-# 大文件/二进制文件
-*.zip
-*.tar.gz
-*.pdf
-*.mp4
-*.pth
-*.bin
+# 模型权重和大文件
 *.pt
-# PyCharm 配置文件
-.idea/
-*.iml
+*.pth
+*.ckpt
+*.safetensors
+*.msgpack
+*.h5
+*.onnx
 
-# Python 缓存文件
-__pycache__/
-*.py[cod]
-
-# 数据文件/日志
-logs/
-*.log
-pretrained_models/
-
-# 环境文件
-.env
-venv/
-# 在 .gitignore 中添加
-*.gif
-dinov2-*/
-gpt2/
+# 数据集
+/data/
 datasets/
-map*/
-pre*/
+
+# 预训练模型
+data/pretrained_models/
+
+# 日志和检查点
+logs/
+checkpoints/
+
+# 虚拟环境
+venv/
+env/
+
+# IDE和编辑器文件
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+
+# 构建文件
+build/
+dist/
+*.egg-info/
+
+# 临时文件
+*.tmp
+*.temp
+__pycache__/
+
+# 大型目录
+xlm-roberta-base/
+pretrain-gate+gridEnhance1/
+pretrain-gate+gridEnhance3/
+pretrain_src/
+pretrain_src2/
+pretrain_src3/
+# DINOv2 及其他大模型目录
+dinov2-*/
+dinov2-base/
+dinov2-with-registers-base-imagenet1k-1-layer/
+
+# Jupyter Notebook 缓存
+.ipynb_checkpoints/
+
+# 3D仿真/场景大文件 (如适用)
+*.usd
+*.usda
+*.usdc
+*.obj
+*.mtl
+*.bin
+VLN_CE/data/

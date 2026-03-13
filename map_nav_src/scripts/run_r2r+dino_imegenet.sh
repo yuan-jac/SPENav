@@ -10,12 +10,12 @@ ft_dim=768
 obj_features=vitbase
 obj_ft_dim=768
 
-ngpus=3
+ngpus=1
 seed=0
 
 name=Grid_Map-${train_alg}-${features}
 name=${name}-seed.${seed}
-name=${name}-init.aug.45k-new_dino+siglip+nomrc+gate_text+gelu
+name=${name}-init.aug.45k-new_dino+siglip+mrc+gate_text+gelu+reset-1module1
 
 outdir=${DATA_ROOT}/R2R/exprs_map/finetune/${name}
 
@@ -42,7 +42,7 @@ flag="--root_dir ${DATA_ROOT}
 
       --batch_size 4
       --lr 1e-5
-      --iters 20000
+      --iters 50000
       --log_every 1000
       --optim adamW
 
@@ -59,7 +59,7 @@ flag="--root_dir ${DATA_ROOT}
 
 #train
 
-CUDA_VISIBLE_DEVICES='0,1,4' python3 -m torch.distributed.launch --node_rank 0 --nnodes=1  --master_port 29511 --nproc_per_node=${ngpus}  map_nav_src/main_nav.py $flag \
+CUDA_VISIBLE_DEVICES='4' python3 -m torch.distributed.launch --node_rank 0 --nnodes=1  --master_port 29511 --nproc_per_node=${ngpus}  map_nav_src/main_nav.py $flag \
     --tokenizer bert \
     --bert_ckpt_file datasets/R2R/exprs_map/pretrain/cmt-vitbase-mlm.mrc.sap-init.lxmert-aug.speaker-new-nocp-2-gate-text/ckpts/model_step_97500.pt \
 

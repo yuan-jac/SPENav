@@ -33,7 +33,7 @@ MODEL:
   DEPTH_ENCODER:
     encode_size: 128
     output_size: 256
-    ddppo_checkpoint: data/pretrained_models/ddppo-models/gibson-2plus-resnet50.pth
+    ddppo_checkpoint: */data/pretrained_models/gibson-2plus-resnet50.pth
   VISUAL_DIM:
     vis_hidden: 768
     directional: 128
